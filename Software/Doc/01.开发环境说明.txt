@@ -1,0 +1,2 @@
+1 晶振 8M 需要修改stm32f4xx.h 中 HSE_VALUE 
+2 STM32F103 RAM 20K
