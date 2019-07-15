@@ -52,16 +52,16 @@ void vTaskTest(void *pvParameters)
 //                5,                     /* priority */
 //                &xHandleTaskNRFTx);    /* handle  */
 	
-    xTaskCreate(App_TestMpu6050,       /* function  */
-                "TestMpu6050",         /* name    */
-                256,                   /* stack size, unit: 4 byte */
-                NULL,                  /* task param */
-                5,                     /* priority */
-                &xHandleTaskMpu);      /* handle  */	
+//    xTaskCreate(App_TestMpu6050,       /* function  */
+//                "TestMpu6050",         /* name    */
+//                256,                   /* stack size, unit: 4 byte */
+//                NULL,                  /* task param */
+//                5,                     /* priority */
+//                &xHandleTaskMpu);      /* handle  */	
 	
     while(1)
     {
-		Test_SendMpu6050();
+//		Test_SendMpu6050();
         vTaskDelay(5);
     }
 }

@@ -67,6 +67,13 @@ extern "C" {
 	#define MPU6050G_S250DPS            ((float)0.0076335f)  // 0.0087500 dps/LSB
 	#define MPU6050G_S500DPS            ((float)0.0152671f)  // 0.0175000 dps/LSB
 	#define MPU6050G_S2000DPS           ((float)0.0609756f)  // 0.0700000 dps/LSB
+	
+	#define MPU6500_G_PER_LSB_2      	(float)((2 * 2) / 65536.0)
+	#define MPU6500_G_PER_LSB_4     	(float)((2 * 4) / 65536.0)
+	#define MPU6500_G_PER_LSB_8         (float)((2 * 8) / 65536.0)
+	#define MPU6500_G_PER_LSB_16        (float)((2 * 16) / 65536.0)
+
+	
 /* Exported struct -----------------------------------------------------------*/
 // 校验数据
 typedef struct
@@ -139,6 +146,8 @@ extern uint8_t MPU6050_GetGyro(s16 *gx, s16 *gy, s16 *gz);
 extern uint8_t MPU6050_GetAcc(s16 *ax, s16 *ay, s16 *az);
 extern uint8_t MPU6050_GetTmp(s16 *temp);
 extern void MPU6050_Calibrate(void);
+
+extern void bsp_mpu6050ReadData(uint8_t *buf);
 
 #ifdef __cplusplus
 }

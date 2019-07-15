@@ -122,7 +122,7 @@ static u8 MPU6050_ModeConfiguration(void)
         return MPU6050_INIT_ERROR;                                                    
     }
 	
-    if(I2C1_WriteOneData(MPU6050_DEVICE_ADDRESS, ACCEL_CONFIG, 0x10) == I2C1_WRITE_ERROR)  // 加速度计自检及测量范围   +-8G
+    if(I2C1_WriteOneData(MPU6050_DEVICE_ADDRESS, ACCEL_CONFIG, 0x18) == I2C1_WRITE_ERROR)  // 加速度计自检及测量范围   +-16G
     {
         return MPU6050_INIT_ERROR;                                                   
     }
@@ -191,9 +191,9 @@ void MPU6050_ReadData(void)
 	MPU6050.Raw.AccY = (((int16_t)mpu_buf[2]<<8) | mpu_buf[3]) - MPU6050.Offset.AccY;
 	MPU6050.Raw.AccZ = (((int16_t)mpu_buf[4]<<8) | mpu_buf[5]) - MPU6050.Offset.AccZ;
 	
-	MPU6050.Raw.GyroX = ((mpu_buf[8]<<8) | mpu_buf[9]) - MPU6050.Offset.GyroX;
-	MPU6050.Raw.GyroY = ((mpu_buf[10]<<8) | mpu_buf[11]) - MPU6050.Offset.GyroY;
-	MPU6050.Raw.GyroZ = ((mpu_buf[12]<<8) | mpu_buf[13]) - MPU6050.Offset.GyroZ;
+	MPU6050.Raw.GyroX = (((int16_t)mpu_buf[8]<<8)  | mpu_buf[9]) - MPU6050.Offset.GyroX;
+	MPU6050.Raw.GyroY = (((int16_t)mpu_buf[10]<<8) | mpu_buf[11]) - MPU6050.Offset.GyroY;
+	MPU6050.Raw.GyroZ = (((int16_t)mpu_buf[12]<<8) | mpu_buf[13]) - MPU6050.Offset.GyroZ;
 	
 	// 单位变换
 	MPU6050.Chg.AccX = (float)MPU6050.Raw.AccX;
@@ -213,6 +213,11 @@ void MPU6050_ReadData(void)
 	MPU6050.Fil.GyroY = MPU6050.Chg.GyroY;
 	MPU6050.Fil.GyroZ = MPU6050.Chg.GyroZ;	
 }
+void bsp_mpu6050ReadData(uint8_t *buf)
+{
+	I2C1_ReadData(MPU6050_DEVICE_ADDRESS, MPU6050_DATA_START, 14, buf);
+}
+
 
 /*********************************************************************************************************
 * Function Name : void (void)

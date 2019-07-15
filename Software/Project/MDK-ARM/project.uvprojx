@@ -412,6 +412,11 @@
               <FileType>1</FileType>
               <FilePath>..\..\User\app\src\app_check.c</FilePath>
             </File>
+            <File>
+              <FileName>app_sensor.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\..\User\app\src\app_sensor.c</FilePath>
+            </File>
           </Files>
         </Group>
         <Group>
@@ -491,6 +496,11 @@
               <FileName>srv_debug.c</FileName>
               <FileType>1</FileType>
               <FilePath>..\..\User\srv\src\srv_debug.c</FilePath>
+            </File>
+            <File>
+              <FileName>srv_sensor.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\..\User\srv\src\srv_sensor.c</FilePath>
             </File>
           </Files>
         </Group>
