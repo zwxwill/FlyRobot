@@ -15,6 +15,8 @@
 #include "bsp_led.h"
 #include "bsp_uart.h"
 #include "bsp_mpu6050.h"
+#include "bsp_motor.h"
+#include "bsp_pwm.h"
 
 #include "app_led.h"
 #include "app_check.h"
@@ -44,9 +46,12 @@ static void App_HardWareInit(void)
 {
     bsp_InitLed();      /* 调试LED */
     bsp_InitUart();     /* 调试串口初始化  */
+	bsp_pwmInit();      /* PWM 电机初始化 */	
+	bsp_Mpu6050Init();  /* MPU6050初始化 */
+	SensorInit();      
 	
-//	bsp_Mpu6050Init();  /* MPU6050初始化 */
-
+	
+	printf("Init finish\n");
 }
 
 
@@ -66,7 +71,7 @@ static void App_TaskCreate(void)
 	
     xTaskCreate(vTaskLED,              /* function  */
                 "vTaskLED",            /* name    */
-                128,                  /* stack size, unit: 4 byte */
+                64,                    /* stack size, unit: 4 byte */
                 NULL,                  /* task param */
                 3,                     /* priority */
                 &xHandleTaskLED);      /* handle  */
@@ -76,7 +81,7 @@ static void App_TaskCreate(void)
 
     xTaskCreate(vTaskTest,             /* function  */
                 "vTaskTest",           /* name    */
-                256,                  /* stack size, unit: 4 byte */
+                128,                   /* stack size, unit: 4 byte */
                 NULL,                  /* task param */
                 8,                     /* priority */
                 &xHandleTaskTest);     /* handle  */
@@ -105,7 +110,7 @@ void app_Init(void)
 {
     xTaskCreate(vTaskStart,            /* function  */
                 "vTaskStart",          /* name    */
-                256,                  /* stack size, unit: 4 byte */
+                256,                   /* stack size, unit: 4 byte */
                 NULL,                  /* task param */
                 configMAX_PRIORITIES-1,/* priority */
                 &xHandleTaskStart);    /* handle  */

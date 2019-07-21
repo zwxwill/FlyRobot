@@ -438,16 +438,6 @@
               <FilePath>..\..\User\bsp\src\bsp_uart.c</FilePath>
             </File>
             <File>
-              <FileName>bsp_tim.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>..\..\User\bsp\src\bsp_tim.c</FilePath>
-            </File>
-            <File>
-              <FileName>bsp_tim_pwm.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>..\..\User\bsp\src\bsp_tim_pwm.c</FilePath>
-            </File>
-            <File>
               <FileName>bsp_spi.c</FileName>
               <FileType>1</FileType>
               <FilePath>..\..\User\bsp\src\bsp_spi.c</FilePath>
@@ -466,6 +456,26 @@
               <FileName>bsp_i2c.c</FileName>
               <FileType>1</FileType>
               <FilePath>..\..\User\bsp\src\bsp_i2c.c</FilePath>
+            </File>
+            <File>
+              <FileName>bsp_pwm.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\..\User\bsp\src\bsp_pwm.c</FilePath>
+            </File>
+            <File>
+              <FileName>bsp_tim.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\..\User\bsp\src\bsp_tim.c</FilePath>
+            </File>
+            <File>
+              <FileName>bsp_tim_pwm.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\..\User\bsp\src\bsp_tim_pwm.c</FilePath>
+            </File>
+            <File>
+              <FileName>bsp_motor.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\..\User\bsp\src\bsp_motor.c</FilePath>
             </File>
           </Files>
         </Group>

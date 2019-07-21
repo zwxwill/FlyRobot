@@ -31,7 +31,7 @@
 void Test_TimInit(void)
 {
 //	bsp_TimInit(TIM4, 1000, 6, 0);
-	bsp_SetTIMOutPWM(GPIOA, GPIO_Pin_0, TIM2, 1, 24000, 5000);
+//	bsp_SetTIMOutPWM(GPIOA, GPIO_Pin_0, TIM2, 1, 24000, 5000);
 }
 
 /**

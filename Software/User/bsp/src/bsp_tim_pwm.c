@@ -269,6 +269,11 @@ void bsp_SetTIMOutPWM(GPIO_TypeDef* GPIOx, uint16_t GPIO_Pin, TIM_TypeDef* TIMx,
 		usPrescaler = 100 - 1;					/* 分频比 = 100 */
 		usPeriod =  (uiTIMxCLK / 100) / _ulFreq  - 1;		/* 自动重装的值 */
 	}
+	else if(_ulFreq == 24000)
+	{
+		usPrescaler = 2;	
+		usPeriod = 1000 - 1;	/* 自动重装的值 */
+	}	
 	else	/* 大于4K的频率，无需分频 */
 	{
 		usPrescaler = 0;					/* 分频比 = 1 */

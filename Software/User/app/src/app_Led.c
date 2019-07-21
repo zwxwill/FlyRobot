@@ -10,7 +10,6 @@
 
 /* Includes ------------------------------------------------------------------*/
 #include "app_led.h"
-#include <stdio.h>
 #include "FreeRTOS.h"
 #include "task.h"
 

@@ -17,6 +17,7 @@
 #include "queue.h"
 
 #include "srv_debug.h"
+#include "srv_sensor.h"
 #include "bsp_uart.h"
 
 /* Exported variables --------------------------------------------------------*/
@@ -36,36 +37,51 @@
   * @param  None
   * @retval None
   */
-void Test_Mpu6050Init(void)
-{
-	bsp_Mpu6050Init();
-}	
-
 void Test_SendMpu6050(void)
 {
 	uint8_t cnt = 0, i = 0, sum = 0;
 	uint8_t buf[50] = {0};
+	int16_t tmp_i16;
+	float   tmp_f;
 
-	buf[cnt++] = 0x88;
-	buf[cnt++] = 0xA1;
-	buf[cnt++] = 0x00;
+	buf[cnt++] = 0xAA; /* 帧头 0xAA */
+	buf[cnt++] = 0xAA; /* 帧头 0xAA */
+	buf[cnt++] = 0xF1; /* 功能码 0xF1 */
+	buf[cnt++] = 0x00; /* Len */
 
-	buf[cnt++] = BYTE3(MPU6050.Ang.Pitch);
-	buf[cnt++] = BYTE2(MPU6050.Ang.Pitch);	
-	buf[cnt++] = BYTE1(MPU6050.Ang.Pitch);
-	buf[cnt++] = BYTE0(MPU6050.Ang.Pitch);
+	tmp_i16 = Mpu6050.GyroRaw.x;
+	buf[cnt++] = BYTE1(tmp_i16);
+	buf[cnt++] = BYTE0(tmp_i16);	
 
-	buf[cnt++] = BYTE3(MPU6050.Ang.Roll);
-	buf[cnt++] = BYTE2(MPU6050.Ang.Roll);	
-	buf[cnt++] = BYTE1(MPU6050.Ang.Roll);
-	buf[cnt++] = BYTE0(MPU6050.Ang.Roll);
+	tmp_i16 = Mpu6050.GyroRaw.y;
+	buf[cnt++] = BYTE1(tmp_i16);
+	buf[cnt++] = BYTE0(tmp_i16);
 	
-	buf[cnt++] = BYTE3(MPU6050.Ang.Yaw);
-	buf[cnt++] = BYTE2(MPU6050.Ang.Yaw);	
-	buf[cnt++] = BYTE1(MPU6050.Ang.Yaw);
-	buf[cnt++] = BYTE0(MPU6050.Ang.Yaw);
+	tmp_i16 = Mpu6050.GyroRaw.z;
+	buf[cnt++] = BYTE1(tmp_i16);
+	buf[cnt++] = BYTE0(tmp_i16);	
 	
-	buf[2]= cnt-3; // 数据长度
+	tmp_f = Mpu6050.Gyro.x;
+	buf[cnt++] = BYTE3(tmp_f);
+	buf[cnt++] = BYTE2(tmp_f);
+	buf[cnt++] = BYTE1(tmp_f);
+	buf[cnt++] = BYTE0(tmp_f);	
+
+	tmp_f = Mpu6050.Gyro.y;
+	buf[cnt++] = BYTE3(tmp_f);
+	buf[cnt++] = BYTE2(tmp_f);
+	buf[cnt++] = BYTE1(tmp_f);
+	buf[cnt++] = BYTE0(tmp_f);
+	
+	tmp_f = Mpu6050.Gyro.z;
+	buf[cnt++] = BYTE3(tmp_f);
+	buf[cnt++] = BYTE2(tmp_f);
+	buf[cnt++] = BYTE1(tmp_f);
+	buf[cnt++] = BYTE0(tmp_f);
+	
+
+	
+	buf[3]= cnt-4; // 数据长度
 	
 	for(i=0; i<cnt; i++)
 	{
@@ -85,16 +101,18 @@ void App_TestMpu6050(void *pvParameters)
 {
 	TickType_t xLastWakeTime;
 	
-	Test_Mpu6050Init();
 //	MPU6050_Calibrate();
 
-	xLastWakeTime = xTaskGetTickCount();
+//	xLastWakeTime = xTaskGetTickCount();
 	
 	while(1)
 	{
-		MPU6050_ReadData();
-		Imu_AHRSUpdate();	
-		vTaskDelayUntil(&xLastWakeTime, 5);
+//		MPU6050_ReadData();
+//		Imu_AHRSUpdate();
+		ProcessAccGyroMeasurements();
+		Test_SendMpu6050();
+		vTaskDelay(5);
+	//	vTaskDelayUntil(&xLastWakeTime, 5);
 	}
 }
 	

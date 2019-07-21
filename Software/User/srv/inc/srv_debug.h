@@ -26,6 +26,9 @@ extern "C" {
 /* Exported struct  ----------------------------------------------------------*/
 /* Exported variables --------------------------------------------------------*/
 /* Exported functions --------------------------------------------------------*/
+extern uint8_t Srv_SendToUsart(void);
+
+
 
 #ifdef __cplusplus
 }

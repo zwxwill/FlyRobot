@@ -33,7 +33,7 @@ MPU6050_str MPU6050;
 #define GYRO_LPF_CUTOFF_FREQ  80
 #define ACCEL_LPF_CUTOFF_FREQ 30
 static lpf2pData accLpf[3];
-static lpf2pData gyroLpf[3];
+lpf2pData gyroLpf[3];
 
 /*********************************************************************************************************
 * Function Name : void (void)
@@ -160,12 +160,12 @@ static u8 MPU6050_ModeConfiguration(void)
 void bsp_Mpu6050Init(void)
 {
 	I2C1_Configuration();
-	MPU6050_Delay(10000);
+	MPU6050_Delay(1000);
 	if(MPU6050_ModeConfiguration() != MPU6050_INIT_OK)
 	{
 		while(1);
 	}
-	MPU6050_Delay(10000);
+	MPU6050_Delay(1000);
 //	MPU6050.Lpf_Factor = Math_Get_LPF_1st_Factor((IMU_LOOP_TIME * 1e-6), ACC_LPF_CUT);	
 //	MPU6050_Calibrate();
 }
